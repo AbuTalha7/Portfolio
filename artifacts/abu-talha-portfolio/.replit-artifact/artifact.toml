@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Abu Talha Portfolio"
+description = "A polished personal portfolio for Abu Talha, a MERN Stack Developer and DevOps Engineer, featuring selected work, technical capabilities, certifications, and direct contact options for potential clients and employers."
+version = "1.0.0"
+id = "artifacts/abu-talha-portfolio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22606
+
+[services.development]
+run = "pnpm --filter @workspace/abu-talha-portfolio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/abu-talha-portfolio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/abu-talha-portfolio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22606"
+BASE_PATH = "/"
